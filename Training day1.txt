@@ -1,0 +1,44 @@
+CREATE DATABASE gmes;
+
+USE gmes;
+CREATE SCHEMA gmeschema5;
+
+create table gmeschema5.hello(
+  PersonID int,
+  LastName varchar(255),
+  FirstName varchar(255),
+  Address varchar(255),
+  City varchar(255) 
+);
+
+select * from gmeschema5.hello;
+
+ALTER TABLE gmeschema5.hello ADD CONSTRAINT PK_test CHECK (PersonID <7);
+
+insert into gmeschema5.hello values (2,'l','p','o','q');
+insert into gmeschema5.hello values (9,'l','p','o','q');
+
+USE AdventureWorks2022;
+
+select * from Person.Person pp inner join HumanResources.Employee he on he.BusinessEntityID=pp.BusinessEntityID
+inner join Person.BusinessEntityContact pbec on pp.BusinessEntityID=pbec.BusinessEntityID
+
+select * from Person.PhoneNumberType
+insert into Person.PhoneNumberType (Name) values (2);
+
+create table #gmetbl
+(user_name varchar(100))
+
+insert into #gmetbl values ('1000');
+
+
+create table metbl
+(user_name varchar(100))
+
+insert into metbl values ('1000');
+
+select * from #gmetbl;
+
+select * from metbl;
+
+alter table metbl add jjj varchar(255);
