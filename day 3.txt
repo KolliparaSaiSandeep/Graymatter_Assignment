@@ -1,0 +1,16 @@
+create table scd1 (slno int identity(1,1) primary key,customerid int ,customername varchar(200),startdate DATETIME,enddate DATETIME);
+insert into scd1 values (1, 'A', '2020-12-11 12:00:00','2021-12-11 12:00:00'),(2, 'B', '2020-12-12 12:00:00','2021-12-12 12:00:00')
+select * from scd1
+Update scd1 set enddate=GETDATE() where customerid=1 and enddate= '2021-12-11 12:00:00';
+
+
+create table scd2 (slno int identity(1,1) primary key,customerid int ,customername varchar(200),startdate DATETIME,enddate DATETIME);
+insert into scd2 values (1, 'A', '2020-12-11 12:00:00','2021-12-11 12:00:00'),(2, 'B', '2020-12-12 12:00:00','2021-12-12 12:00:00')
+alter table scd2 add prevcustomername nvarchar(50);
+update scd2 set prevcustomername='aa' where customerid=1;
+select * from scd2
+
+create table scd3 (slno int identity(1,1) primary key,customerid int ,customername varchar(200),startdate DATETIME,enddate DATETIME);
+insert into scd3 values (1, 'A', '2020-12-11 12:00:00','2021-12-11 12:00:00'),(2, 'B', '2020-12-12 12:00:00','2021-12-12 12:00:00')
+insert into scd3 values (3, 'A', '2020-12-11 12:00:00','2021-12-11 12:00:00')
+select * from scd3
