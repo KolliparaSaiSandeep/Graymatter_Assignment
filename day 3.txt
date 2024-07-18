@@ -14,3 +14,73 @@ create table scd3 (slno int identity(1,1) primary key,customerid int ,customerna
 insert into scd3 values (1, 'A', '2020-12-11 12:00:00','2021-12-11 12:00:00'),(2, 'B', '2020-12-12 12:00:00','2021-12-12 12:00:00')
 insert into scd3 values (3, 'A', '2020-12-11 12:00:00','2021-12-11 12:00:00')
 select * from scd3
+
+
+--Casting
+Select SalesOrderID, OrderDate, cast(OrderDate as date) as NewOrderDate from Sales.SalesOrderHeader
+
+--Extracting domain name from mailID
+Select EmailAddress, substring(EmailAddress, CHARINDEX('@',EmailAddress)+1, len(EmailAddress))
+as DomainName 
+from Person.EmailAddress
+
+--creating function for extracting
+create function extractDomain(@mail nvarchar(50))
+returns nvarchar(20)
+as 
+begin
+	declare @domain nvarchar(20)
+	set @domain = SUBSTRING(@mail, charindex('@',@mail)+1, len(@mail))
+	return @domain
+end
+
+select dbo.extractDomain('hemrishi@wordle.in')
+select dbo.extractDomain('hemrishi')
+
+
+--Merge
+create table targett(
+ID int primary key,
+Pname nvarchar(15),
+Loc nvarchar(15))
+
+create table #source(
+ID int primary key,
+Pname nvarchar(15),
+Loc nvarchar(15))
+
+insert into targett values
+(1, 'Norris', 'UK'),
+(2, 'Leclerc', 'Monaco'),
+(3, 'Ricciardo', 'Austria'),
+(4, 'Perez', 'Mexico'),
+(5, 'Zhou', 'China')
+
+insert into #source values
+(1, 'Norris', 'UK'),
+(2, 'Leclerc', 'Monaco'),
+(3, 'Ricciardo', 'Australia'),
+(6, 'Lauda', 'Austria'),
+(5, 'Guanyu', 'China')
+
+merge targett as target using #source as source
+on (target.ID = source.ID)
+when matched and (target.Pname <> source.Pname or target.Loc <> source.Loc)
+then update set target.Pname = source.Pname, target.Loc = source.Loc
+when not matched by target
+then insert values(source.ID, source.Pname, source.Loc);
+
+select * from targett
+
+
+--Soft deleting when source has incremental data
+update sales.customerdim
+set recordenddate=getdate(), iscurrent=0, isdeleted=1
+where customerID in(
+select customerID
+from sales.CustomerDim
+where IsCurrent = 1)
+and customerID in(
+select cusotmerID
+from #incremental
+where isdeleted=1)
