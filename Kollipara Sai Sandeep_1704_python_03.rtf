@@ -1,0 +1,186 @@
+{\rtf1\ansi\ansicpg1252\deff0\nouicompat\deflang1033{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil\fcharset161 Calibri;}{\f2\fnil\fcharset2 Symbol;}}
+{\*\generator Riched20 10.0.19041}\viewkind4\uc1 
+\pard\sa200\sl276\slmult1\b\f0\fs40\lang9 Python Assignment\b0\fs22\par
+1. Number Categorizer\par
+
+\pard{\pntext\f2\'B7\tab}{\*\pn\pnlvlblt\pnf2\pnindent0{\pntxtb\'B7}}\fi-142\li142\sa200\sl276\slmult1 Write a Python program that prompts the user to enter a number between 1 and 100.\par
+
+\pard\sa200\sl276\slmult1 o If the number is less than 50, print "The number is small."\par
+o If the number is between 50 and 75 (inclusive), print "The number is medium."\par
+o If the number is greater than 75, print "The number is large."\par
+o If the input is not a valid number or not in the range 1 to 100, print "Invalid \par
+input."\par
+o After printing the message, ask the user if they want to input another number. If \par
+yes, repeat the process; if no, end the program with a message "Thank you for \par
+using the program."\par
+o Ensure that the program continues to prompt for new numbers until the user \par
+decides to stop.\par
+def number_categorizer():\par
+    while True:\par
+        try:\par
+            number = int(input("Enter a number between 1 and 100: "))\par
+            if 1 <= number < 50:\par
+                print("The number is small.")\par
+            elif 50 <= number <= 75:\par
+                print("The number is medium.")\par
+            elif 76 <= number <= 100:\par
+                print("The number is large.")\par
+            else:\par
+                print("Invalid input.")\par
+        except ValueError:\par
+            print("Invalid input.")\par
+        another = input("Do you want to input another number? (yes/no): ").strip().lower()\par
+        if another != 'yes':\par
+            print("Thank you for using the program.")\par
+            break\par
+number_categorizer()\par
+2. Even or Odd Checker\par
+
+\pard{\pntext\f2\'B7\tab}{\*\pn\pnlvlblt\pnf2\pnindent0{\pntxtb\'B7}}\fi-142\li142\sa200\sl276\slmult1  Write a program that asks the user to enter a number.\par
+
+\pard\sa200\sl276\slmult1 o Check if the number is even or odd.\par
+o Print "The number is even" if the number is even, otherwise print "The number \par
+is odd."\par
+def even_or_odd_checker():\par
+    try:\par
+        number = int(input("Enter a number: "))\par
+        if number % 2 == 0:\par
+            print("The number is even.")\par
+        else:\par
+            print("The number is odd.")\par
+    except ValueError:\par
+        print("Invalid input.")\par
+even_or_odd_checker()\par
+3. Simple Calculator\par
+
+\pard{\pntext\f2\'B7\tab}{\*\pn\pnlvlblt\pnf2\pnindent0{\pntxtb\'B7}}\fi-142\li142\sa200\sl276\slmult1 Write a program that performs basic arithmetic operations (addition, subtraction, \par
+
+\pard\sa200\sl276\slmult1 multiplication, and division).\par
+o Prompt the user to enter two numbers and choose an operation (+, -, *, /).\par
+o Perform the chosen operation and display the result.\par
+o Handle division by zero errors with a suitable message.\par
+def simple_calculator():\par
+    try:\par
+        num1 = float(input("Enter the first number: "))\par
+        num2 = float(input("Enter the second number: "))\par
+        operation = input("Enter the operation (+, -, *, /): ").strip()\par
+        if operation == '+':\par
+            result = num1 + num2\par
+        elif operation == '-':\par
+            result = num1 - num2\par
+        elif operation == '*':\par
+            result = num1 * num2\par
+        elif operation == '/':\par
+            if num2 == 0:\par
+                print("Error: Division by zero.")\par
+                return\par
+            result = num1 / num2\par
+        else:\par
+            print("Invalid operation.")\par
+            return\par
+        print(f"The result is: \{result\}")\par
+    except ValueError:\par
+        print("Invalid input.")\par
+simple_calculator()\par
+4. Number Guessing Game\par
+
+\pard{\pntext\f2\'B7\tab}{\*\pn\pnlvlblt\pnf2\pnindent0{\pntxtb\'B7}}\fi-142\li142\sa200\sl276\slmult1  Write a program that randomly selects a number between 1 and 10.\par
+
+\pard\sa200\sl276\slmult1 o Prompt the user to guess the number.\par
+o Provide feedback if the guess is too high or too low.\par
+o Allow the user to guess again until they \f1\u976?ind the correct number.\par
+o Print a congratulatory message when the correct number is guessed.\par
+\lang1032 import random\par
+def number_guessing_game():\par
+    number_to_guess = random.randint(1, 10)\par
+    print("Welcome to the Number Guessing Game!")\par
+    while True:\par
+        try:\par
+            guess = int(input("Guess the number between 1 and 10: "))\par
+            if guess < 1 or guess > 10:\par
+                print("Please enter a number between 1 and 10.")\par
+                continue\par
+            if guess < number_to_guess:\par
+                print("Too low. Try again.")\par
+            elif guess > number_to_guess:\par
+                print("Too high. Try again.")\par
+            else:\par
+                print("Congratulations! You guessed the correct number.")\par
+                break\par
+        except ValueError:\par
+            print("Invalid input. Please enter a number.")\par
+number_guessing_game()\par
+\lang9 5. Multiplication Table\par
+
+\pard{\pntext\f2\'B7\tab}{\*\pn\pnlvlblt\pnf2\pnindent0{\pntxtb\'B7}}\fi-142\li142\sa200\sl276\slmult1\tx142\f0 Write a program that prompts the user to enter a number.\par
+
+\pard\sa200\sl276\slmult1 o Generate and display the multiplication table for that number (from 1 to 10).\par
+def factorial_calculator():\par
+    try:\par
+        number = int(input("Enter a non-negative integer: "))\par
+        if number < 0:\par
+            print("Factorial is not defined for negative numbers.")\par
+            return\par
+        factorial = 1\par
+        for i in range(1, number + 1):\par
+            factorial *= i\par
+        print(f"The factorial of \{number\} is \{factorial\}.")\par
+    except ValueError:\par
+        print("Invalid input.")\par
+factorial_calculator()\par
+6. Factorial Calculator\par
+
+\pard{\pntext\f2\'B7\tab}{\*\pn\pnlvlblt\pnf2\pnindent0{\pntxtb\'B7}}\fi-284\li284\sa200\sl276\slmult1 Write a program that prompts the user to enter a non-negative integer.\par
+
+\pard\sa200\sl276\slmult1 o Calculate the factorial of the number (n!) using a loop.\par
+o Display the result.\par
+def factorial_calculator():\par
+    try:\par
+        number = int(input("Enter a non-negative integer: "))\par
+        if number < 0:\par
+            print("Factorial is not defined for negative numbers.")\par
+            return\par
+        factorial = 1\par
+        for i in range(1, number + 1):\par
+            factorial *= i\par
+        print(f"The factorial of \{number\} is \{factorial\}.")\par
+    except ValueError:\par
+        print("Invalid input.")\par
+factorial_calculator()\par
+7. Palindrome Checker\par
+
+\pard{\pntext\f2\'B7\tab}{\*\pn\pnlvlblt\pnf2\pnindent0{\pntxtb\'B7}}\fi-284\li284\sa200\sl276\slmult1\tx142  Write a program that prompts the user to enter a word or phrase.\par
+
+\pard\sa200\sl276\slmult1 o Check if the entered text is a palindrome (reads the same forwards and \par
+backwards).\par
+o Print "The text is a palindrome" or "The text is not a palindrome" based on the \par
+result.\par
+def palindrome_checker():\par
+    text = input("Enter a word or phrase: ").replace(" ", "").lower()\par
+    if text == text[::-1]:\par
+        print("The text is a palindrome.")\par
+    else:\par
+        print("The text is not a palindrome.")\par
+palindrome_checker()\par
+8. List Sum Calculator\par
+
+\pard{\pntext\f2\'B7\tab}{\*\pn\pnlvlblt\pnf2\pnindent0{\pntxtb\'B7}}\fi-142\li142\sa200\sl276\slmult1  Write a program that initializes a list of numbers.\par
+
+\pard\sa200\sl276\slmult1 o Calculate and print the sum of all numbers in the list.\par
+o Prompt the user to enter a number to add to the list.\par
+o Update the list and print the new sum\par
+def list_sum_calculator():\par
+    numbers = [1, 2, 3, 4, 5\par
+    total_sum = sum(numbers)\par
+    print(f"The sum of the list is: \{total_sum\}")\par
+    try:\par
+        new_number = int(input("Enter a number to add to the list: "))\par
+        numbers.append(new_number)\par
+        total_sum += new_number\par
+        print(f"Updated list: \{numbers\}")\par
+        print(f"New sum of the list is: \{total_sum\}")\par
+    except ValueError:\par
+        print("Invalid input.")\par
+list_sum_calculator()\par
+}
+ 
