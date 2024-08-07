@@ -1,0 +1,45 @@
+1)Jobs, Stages, and Actions
+Job:
+A high-level unit of work.
+Contains multiple stages.
+Triggered by an action.
+
+Stage:
+A set of tasks that can be executed in parallel.
+Dependent on the results of previous stages.
+
+Action:
+Triggers the execution of a job.
+Examples: collect(), count(), saveAsTextFile().
+
+
+Partitioning in PySpark: A Deep Dive
+Default Partition Size
+In PySpark, a job is a unit of work that is submitted to the Spark cluster. It consists of one or more stages, and each stage represents a set of tasks that can be executed in parallel. An action is an operation that triggers the computation of a job.
+
+The default partition size in PySpark is approximately 128MB.
+This means Spark aims to divide the data into chunks of about 128MB each.
+
+Factors Affecting Partition Size:-
+Data Size: The total size of the data determines the number of partitions.
+Cluster Resources: The number of cores and available memory on the cluster influences partition size.
+Data Format: The format of the data (e.g., CSV, Parquet) can impact partitioning.
+Spark Configurations: Parameters like spark.sql.files.maxPartitionBytes can be used to adjust partition size.
+Changing Partition Size
+Using repartition(): This method creates a new DataFrame with the specified number of partitions. However, it shuffles all data, which can be expensive.
+Using coalesce(): This method reduces the number of partitions without shuffling. It's efficient but doesn't increase the number of partitions.
+Setting spark.sql.files.maxPartitionBytes: This configuration property sets the maximum size of a partition when reading files.
+
+Who Determines Partitioning
+The user ultimately determines the partitioning strategy by:
+Choosing the appropriate data format.
+Setting Spark configurations.
+Using repartition() or coalesce() when necessary.
+Partitioning a 2TB Dataset
+
+For a 2TB dataset, the default partition size of 128MB would result in approximately 16,384 partitions. However, this might not be optimal for all scenarios.
+
+Considerations:
+Cluster Size: If you have a large cluster, you might want more partitions for better parallelism.
+Data Skew: If the data is skewed, you might need to adjust partitioning to handle uneven data distribution.
+Shuffle Operations: For operations like joins or aggregations, consider the impact of partitioning on shuffle performance.
